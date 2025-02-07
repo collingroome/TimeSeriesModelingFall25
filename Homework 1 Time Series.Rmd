@@ -1,0 +1,78 @@
+---
+title: "Homework 1 Time Series"
+output: html_document
+date: "2025-02-03"
+---
+
+```{r}
+Typical_Employee_Survey_Data <- read.csv("C:/Users/cgroo/OneDrive/Documents/Typical_Employee_Survey_Data.csv", header=FALSE)
+
+names(Typical_Employee_Survey_Data)[1] <- "Age"
+names(Typical_Employee_Survey_Data)[2] <- "Gender"
+names(Typical_Employee_Survey_Data)[3] <- "Satisfaction"
+names(Typical_Employee_Survey_Data)[4] <- "JobCharacteristics"
+names(Typical_Employee_Survey_Data)[5] <- "Years"
+names(Typical_Employee_Survey_Data)[6] <- "Promotion"
+names(Typical_Employee_Survey_Data)[7] <- "Decisions"
+names(Typical_Employee_Survey_Data)[8] <- "Budget"
+names(Typical_Employee_Survey_Data)[9] <- "Proud"
+names(Typical_Employee_Survey_Data)[10] <- "TurnDown"
+names(Typical_Employee_Survey_Data)[11] <- "Relations"
+
+fivenum(Typical_Employee_Survey_Data$Age)
+boxplot(Typical_Employee_Survey_Data$Age, main = "Employees Age")
+fivenum(Typical_Employee_Survey_Data$Years)
+boxplot(Typical_Employee_Survey_Data$Years, main = "Years Working Here")
+
+Typical_Employee_Survey_Data$Gender <- factor(Typical_Employee_Survey_Data$Gender, levels = c(1, 2), labels = c("Male", "Female"))
+Typical_Employee_Survey_Data$Satisfaction <- factor(Typical_Employee_Survey_Data$Satisfaction, levels = c(1,2,3,4), labels = c("Very Satisfied","Moderately Satisfied", "A Little Dissatisfied", "Very Dissatisfied"))
+Typical_Employee_Survey_Data$JobCharacteristics <- factor(Typical_Employee_Survey_Data$JobCharacteristics, levels = c(1,2,3,4,5), labels = c("High Income", "No Firing", "Flexible Hours", "Advancement", "Enjoying Work"))
+Typical_Employee_Survey_Data$Promotion <- factor(Typical_Employee_Survey_Data$Promotion, levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely", "Very Unlikely"))
+Typical_Employee_Survey_Data$Decisions <- factor(Typical_Employee_Survey_Data$Decisions, levels = c(1,2,3,4), labels = c("Always", "Much of the time", "Sometimes", "Never"))
+Typical_Employee_Survey_Data$Budget <- factor(Typical_Employee_Survey_Data$Budget, levels = c(1,2), labels = c("Yes", "No"))
+Typical_Employee_Survey_Data$Proud <- factor(Typical_Employee_Survey_Data$Proud, levels = c(1,2,3,4), labels = c("Very", "Somewhat", "Indifferent", "Not"))
+Typical_Employee_Survey_Data$TurnDown <- factor(Typical_Employee_Survey_Data$TurnDown, levels = c(1,2,3,4,5), labels = c("Very Likely", "Likely", "Not Sure", "Unlikely", "Very Unlikely"))
+Typical_Employee_Survey_Data$Relations <- factor(Typical_Employee_Survey_Data$Relations, levels = c(1,2,3,4,5), labels = c("Very Good", "Good", "So So", "Bad", "Very Bad"))
+
+barplot(table(Typical_Employee_Survey_Data$Gender), main = "Distribution by Gender")
+#This bar plot distributes the gender of the workers who took the survey. The key takeaway is that the overall ratio between male and female is relatively even. Males do outnumber Females by about 20. 
+
+barplot(table(Typical_Employee_Survey_Data$Satisfaction), main= "Employee's Satification Levels", cex.names = 0.7)
+# This bar plot shows the distributions of the Employee's Satisfaction Levels. This chart shows that most employees are either very satisfied or moderately satisfied. There are some that are dissatisfied but compared to overall numbers it is a small majority.
+
+pie(table(Typical_Employee_Survey_Data$JobCharacteristics), main= "Most Important Job Characteristic")
+# This pie chart shows which Job Characteristics are most important to the employees. It shows a clear favorite that enjoying the work is the most important with over half the employees saying so. This should show the company that they should focus more on making work more fun and enjoyable.
+
+barplot(table(Typical_Employee_Survey_Data$Promotion), main= "Employee's Promotion Chances", cex.names = 0.7)
+# This bar chart shows  each employee thoughts on how their chances to be promoted. It is relatively even across the board  with a very small number of people with no opinion. 
+
+barplot(table(Typical_Employee_Survey_Data$Decisions), main= "Make Decisions that Affect your Work", cex.names = 0.7)
+# This bar chart shows if employees think they are making meaningful decisions. The majority of employees think that most of the time or some of the time their decisions make an impact. There is a very small number that think they never make decisions. 
+
+barplot(table(Typical_Employee_Survey_Data$Budget), main= "Make Budget Decisions")
+# This chart shows which employees make budget decisions. The analysis of this chart is that it is almost evenly spread between yes and no, with more answers being yes.
+
+barplot(table(Typical_Employee_Survey_Data$Proud),main = "Proud To Work Here")
+#This plot shows the distribution on if employees are proud to be working at the company. Somewhat proud was the most popular answer by a wide margin. The second most selected answer was very proud. This should tell the company that they are doing a good job with their relationships with employees but overall could be better. 
+
+barplot(table(Typical_Employee_Survey_Data$TurnDown), main = "Chances to Turn Down Higher Paying Offer")
+# This plot shows the distribution of whether or not employees would stay at this current job if they were offered a different higher paid option. The key takeaway from this visual is that majority of employees would be unlikely to turn it down. This is an important takeaway as the company should put more focus on keeping their employees. 
+
+barplot(table(Typical_Employee_Survey_Data$Relations), main = "Employee Relationships")
+# This plot shows how employees view their relationships with other employees. The visual depicts that there is a high majority who think they have very good or good relationship with others. It is a key takeaway that there is a very small amount who chose bad.
+
+plot(Typical_Employee_Survey_Data$Age, Typical_Employee_Survey_Data$Years, main = "Age versus Years in Company", xlab = "Age", ylab = "Years With Company")
+# This scatter plot shows the age of employees versus years in the company. The analysis that can be taken away from this graphic is that it is a pretty even spread in ages of the employees and years with the company. There is a lot of employees between there 30s and 40s which have been with the company for less then 10 years. 
+
+scatter.smooth(Typical_Employee_Survey_Data$JobCharacteristics,Typical_Employee_Survey_Data$Age, ylab = "Age",xlab = "Job Characteristics")
+#This scatter plot helps shows the trends between age and important job characteristics. One analysis that you could take away from this plot is that the younger workers trend to think enjoying the work is most important. Another takeaway could be that middle aged workers between the ages of 30 to 40 prefer high income and enjoying their work.
+
+
+
+
+
+
+
+```
+
+
